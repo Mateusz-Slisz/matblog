@@ -1,2 +1,2 @@
 # matblog
-Hi, its my blog created on Django
+Hi, its my blog created by Django
