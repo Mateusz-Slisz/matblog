@@ -2,18 +2,41 @@
 
 <html>
     <head>
-      <title>Strona ciekawa</title>
-      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-      <link rel="stylesheet" href="{% static 'css/blog.css' %}">
-      <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+        <title>MatBlog</title>
+        <!-- Some CSS -->
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+        <!-- Some Fonts -->
+        <link href="//fonts.googleapis.com/css?family=Lora" rel="stylesheet" type="text/css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <div class="page-header">
-          {% if user.is_authenticated %}
-            <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
-          {% endif %}
-            <h1><a href="/">Mati super ciekawa strona</a></h1>
+        <div class="container">
+            <div class="masthead">
+                <h3 class="text-muted">Matblog</h3>
+                <nav class="navbar navbar-light bg-faded rounded mb-3">
+                    <ul class="nav navbar-nav text-md-center justify-content-md-between">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Projects</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contact</a>
+                        </li>                       
+                        {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'post_new' %}"><span class="glyphicon glyphicon-plus"></span></a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
         </div>
         <div class="content container">
             <div class="row">
@@ -23,5 +46,8 @@
                 </div>
             </div>
         </div>
+        <footer class="footer">
+            <p>&copy; MatBlog 2017</p>
+        </footer>
     </body>
 </html>
