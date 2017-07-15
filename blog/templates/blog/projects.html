@@ -1,0 +1,27 @@
+{% extends 'blog/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="main">
+	<h2>Now I'm working on web application named ABME.</h2>
+	<div class="used">
+		<h3>Used of</h3>
+		<ul>
+			<li>Python/Django (authentication system etc)</li>
+			<li>Database</li>
+			<li>Js,Css,Html</li>
+		</ul>
+	</div>
+</div>
+<div>
+	<div class="border">
+		<img class="mySlides" src="{% static 'media/1.png' %}">
+		<img class="mySlides" src="{% static 'media/2.png' %}">
+		<img class="mySlides" src="{% static 'media/3.png' %}">
+	<div class="border">
+	<button class="batonik" onclick="currentDiv(1)">1</button> 
+	<button class="batonik" onclick="currentDiv(2)">2</button> 
+	<button class="batonik" onclick="currentDiv(3)">3</button> 
+</div>
+<script type="text/javascript" src="{% static 'js/slider.js' %}"></script>
+{% endblock %}

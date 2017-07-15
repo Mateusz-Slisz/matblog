@@ -10,44 +10,59 @@
         <!-- Some Fonts -->
         <link href="//fonts.googleapis.com/css?family=Lora" rel="stylesheet" type="text/css">
         <link href="//fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+        <link href="{% static 'font-awesome/css/font-awesome.css' %}" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <div class="container">
-            <div class="masthead">
-                <h3 class="text-muted">Matblog</h3>
-                <nav class="navbar navbar-light bg-faded rounded mb-3">
-                    <ul class="nav navbar-nav text-md-center justify-content-md-between">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Projects</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
-                        </li>                       
+        <!-- Navbar -->
+        <div class="custom">
+            <ul class="nav navbar-nav">
+                <li class="nav-item">
+                    <img class="logo" src="{% static 'media/logo.png' %}">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'projects' %}">Projects</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about' %}">About</a>
                         {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'post_new' %}"><span class="glyphicon glyphicon-plus"></span></a>
-                        </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'post_new' %}"><span class="glyphicon glyphicon-plus"></span></a>
                         {% endif %}
-                    </ul>
-                </nav>
-            </div>
+            </ul>
         </div>
+        <!-- Variable container -->
         <div class="content container">
-            <div class="row">
-                <div class="col-md-8">
+            <div class="row row-centered">
+                <div class="col-md-8 col-centered">
                 {% block content %}
                 {% endblock %}
                 </div>
             </div>
         </div>
+        <!-- footer -->
+        <div class="end container">
         <footer class="footer">
+            <ul class="list-inline text-center">
+                <li>
+                    <a target="_blank" href="//www.facebook.com/mateusz.slisz">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a target="_blank" href="//github.com/b1oader">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
             <p>&copy; MatBlog 2017</p>
+            </ul>        
         </footer>
+        </div>
+
     </body>
 </html>

@@ -1,0 +1,38 @@
+{% extends 'blog/base.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+<div class="about">
+	<div class="first">
+		<img src="{% static 'media/obraz.png' %}">
+		<div>
+			<h2>Mateusz Slisz</h2>
+			<h3>Junior Programmer</h3>
+		</div>
+	</div>
+	<div class="second">
+		<p>Hi my name is Mat and I am 20 years old, currently studying Computer Science in University of Economics in Katowice.</p>
+		<p1>I am mainly interested in Python and his framework Django.<br>Also looking for a job in a position Junior Django Developer, so if u have any info contact me via email <a href="mailto:mat.slisz@yahoo.com">mat.slisz@yahoo.com</a>
+		</p1>
+	</div>
+	<div class="third">
+		<div class="left-skills">
+			<h1>Skills</h1>
+			<ul>
+				<li>Python/Django</li>
+				<li>CSS3</li>
+				<li>HTML5</li>
+			</ul>
+		</div>
+		<div class="right-knowledge">
+			<h1>Knowledge of</h1>
+			<ul>
+				<li>Version Control System-Git</li>
+				<li>SQL Database</li>
+				<li>Bootstrap</li>
+			</ul>
+		</div>
+	</div>
+</div>
+{% endblock %}
