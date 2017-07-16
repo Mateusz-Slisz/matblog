@@ -1,8 +1,14 @@
 {% load staticfiles %}
-
+<!DOCTYPE html>
 <html>
     <head>
         <title>MatBlog</title>
+        <!-- Meta -->
+        <meta charset="UTF-8">
+        <meta name="description" content="MatBlog">
+        <meta name="keywords" content="Python,Django,HTML,CSS,JavaScript">
+        <meta name="author" content="Mateusz Slisz">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Some CSS -->
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
@@ -17,6 +23,7 @@
         <div class="custom">
             <ul class="nav navbar-nav">
                 <li class="nav-item">
+                    <!-- logo created by https://logomakr.com/ -->
                     <img class="logo" src="{% static 'media/logo.png' %}">
                 <li class="nav-item active">
                     <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
@@ -39,30 +46,29 @@
                 </div>
             </div>
         </div>
-        <!-- footer -->
+        <!-- Footer -->
         <div class="end container">
         <footer class="footer">
             <ul class="list-inline text-center">
                 <li>
                     <a target="_blank" href="//www.facebook.com/mateusz.slisz">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                        </span>
+                    <span class="fa-stack fa-lg">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                    </span>
                     </a>
                 </li>
                 <li>
                     <a target="_blank" href="//github.com/b1oader">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                        </span>
+                    <span class="fa-stack fa-lg">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                    </span>
                     </a>
                 </li>
             <p>&copy; MatBlog 2017</p>
             </ul>        
         </footer>
         </div>
-
     </body>
 </html>
