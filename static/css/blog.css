@@ -9,29 +9,6 @@ h1, h2, h3, h4 {
     font-family: 'Lora', cursive;
 }
 
-.custom {
-    background-color: #fafafa;
-    border-bottom: 1px solid #e5e5e5;
-    width: none;
-}
-
-.nav {
-    list-style:none;
-    text-align: right;
-    padding-right: 400px;
-}
-
-.nav li {
-    display: inline-block;
-    float: none;
-    text-align: center;
-}
-
-.nav a {
-    text-align:center;
-    text-decoration: none; 
-}
-
 .date {
     color: #828282;
     position: absolute;
@@ -78,27 +55,6 @@ h1, h2, h3, h4 {
     padding-top: 40px;
     border-top: 1px solid #e5e5e5;
     height: 1px;
-}
-
-.navbar-nav {
-    float: none;
-}
-
-.navbar {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#f7f7f7),to(#eee));
-    background-image: -webkit-linear-gradient(top, #f7f7f7 0%,#eee 100%);
-    background-image: -o-linear-gradient(top, #f7f7f7 0%,#eee 100%);
-    background-image: linear-gradient(to bottom, #f7f7f7 0%,#eee 100%);
-    border: 1px solid #e5e5e5;
-}
-
-.nav-link {
-    color: #595959;
-    font-size: 16px;
-}
-
-.nav-link:hover, .nav-link:visited {
-    color: #0d0d0d;
 }
 
 a {
@@ -170,10 +126,6 @@ a:hover {
     border-bottom: 1px solid #e5e5e5;
 }
 
-.nav img {
-    padding-right: 600px;
-}
-
 .batonik {
     background-color: white;
     border: none;
@@ -192,4 +144,8 @@ a:hover {
 .batonik:hover, .batonik:focus {
     background-color: #555555;
     color: white;
+}
+
+.navbar .navbar-brand {
+    padding-top: 9px;
 }
