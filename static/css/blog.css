@@ -79,22 +79,21 @@ a:hover {
     float:none; 
 }
 
-.about, .main {
+.main {
     text-align: left;
     margin-top: 50px;
 }
 
+.first h2 {
+    display:inline;
+    font-size: 35px;
+}
+
 .first {
-    display: inline-flex;
-}
-
-.first div{
     font-size: 30px;
-    padding-top: 10px;
-    padding-left: 300px;
 }
 
-.first div h2 {
+.first h2 {
     border-bottom: 1px solid #e5e5e5;
 }
 
@@ -107,11 +106,16 @@ a:hover {
 
 .third {
     padding-top: 40px;
-    display: inline-flex;
+    display: block;
 }
 
-.third .right-knowledge {
-    padding-left: 375px;
+.third ul li {
+    text-align: left;
+    font-size: 15px;
+}
+
+.third ul {
+    list-style-type: square;
 }
 
 .second a {
@@ -148,4 +152,13 @@ a:hover {
 
 .navbar .navbar-brand {
     padding-top: 9px;
+}
+
+img {
+    max-width: 100%;
+}
+
+.about {
+    max-width: 100%;
+    max-height: 100%;
 }
