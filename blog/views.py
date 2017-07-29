@@ -7,11 +7,20 @@ from django.shortcuts import redirect
 
 
 def post_list(request):
-    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')[0:3]
     return render(request, 'blog/post_list.html', {'posts': posts})
+
+
+def other_post_list(request):
+    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')[3:]
+    return render(request, 'blog/other_post_list.html', {'posts': posts})
+
+
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     return render(request, 'blog/post_detail.html', {'post': post})
+
+
 def post_new(request):
     if request.method == "POST":
         form = PostForm(request.POST)
@@ -24,6 +33,8 @@ def post_new(request):
     else:
         form = PostForm()
     return render(request, 'blog/post_edit.html', {'form': form})
+
+
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
@@ -36,8 +47,12 @@ def post_edit(request, pk):
             return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm(instance=post)
-    return render(request, 'blog/post_edit.html', {'form': form})    
-def about (request):
+    return render(request, 'blog/post_edit.html', {'form': form})
+
+
+def about(request):
     return render(request, 'blog/about.html')
-def projects (request):
+
+
+def projects(request):
     return render(request, 'blog/projects.html')

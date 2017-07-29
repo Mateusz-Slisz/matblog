@@ -51,7 +51,7 @@ h1, h2, h3, h4 {
 }
 
 .footer {
-    margin-top: 100px;
+    margin-top: 0px;
     padding-top: 40px;
     border-top: 1px solid #e5e5e5;
     height: 1px;
@@ -161,4 +161,29 @@ img {
 .about {
     max-width: 100%;
     max-height: 100%;
+}
+
+.pager li a:focus, .pager li a:hover {
+    color: #fff;
+    background-color: #0085A1;
+    border: 1px solid #0085A1;
+}
+
+.pager .disabled a, .pager .disabled a:focus, .pager .disabled a:hover, .pager .disabled span {
+    color: #777;
+    background-color: #333;
+    cursor: not-allowed;
+}
+
+.pager li a, .pager li span {
+    font-size: 13px;
+    padding: 10px 20px;
+    background-color: #fff;
+    border-radius: 0;
+}
+
+.pager li a, .pager li span {
+    font-family: 'Open Sans';
+    font-weight: 800;
+    letter-spacing: 1px;
 }
