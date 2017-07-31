@@ -1,6 +1,6 @@
 # Matblog
 Hi, its blog created by me, just for porfolio.
-## Used of
+## Technologies used:
 * Python/Django
 * HTML5
 * CSS3/Bootstrap3
