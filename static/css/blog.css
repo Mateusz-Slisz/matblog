@@ -54,7 +54,6 @@ h1, h2, h3, h4 {
     margin-top: 50px;
     padding-top: 40px;
     border-top: 1px solid #e5e5e5;
-    height: 1px;
 }
 
 a {
@@ -130,6 +129,10 @@ a:hover {
     border-bottom: 1px solid #e5e5e5;
 }
 
+.mySlides {
+    display:none
+}
+
 .batonik {
     background-color: white;
     border: none;
@@ -143,6 +146,10 @@ a:hover {
     -webkit-transition-duration: 0.4s; 
     transition-duration: 0.4s;
     border: 2px solid #555555;
+}
+
+button:focus, button {
+    outline: none;
 }
 
 .batonik:hover, .batonik:focus {
@@ -186,4 +193,9 @@ img {
     font-family: 'Open Sans';
     font-weight: 800;
     letter-spacing: 1px;
+}
+
+.w3-dark-grey,.w3-hover-dark-grey:hover,.w3-dark-gray,.w3-hover-dark-gray:hover{
+    color:#fff!important;
+    background-color:#616161!important;
 }
