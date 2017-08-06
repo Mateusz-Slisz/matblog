@@ -20,7 +20,6 @@ h1, h2, h3, h4 {
     width: 100%;
 }
 
-
 .post {
     margin-bottom: 70px;
     padding-bottom: 40px;
@@ -29,6 +28,11 @@ h1, h2, h3, h4 {
     text-align: left;
     margin-top: 50px;
 }
+
+.post img {
+    display: right;
+}
+
 .post p {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -72,6 +76,8 @@ a:hover {
 .row-centered {
     text-align:center;
 }
+
+
 
 .col-centered { 
     display:inline-block; 
@@ -198,4 +204,36 @@ img {
 .w3-dark-grey,.w3-hover-dark-grey:hover,.w3-dark-gray,.w3-hover-dark-gray:hover{
     color:#fff!important;
     background-color:#616161!important;
+}
+
+.text, .img{
+    display: inline-block
+}
+
+.text {
+    float: right;
+}
+
+.img {
+    float: left;
+}
+
+article {
+    margin-top: 50px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+article a:hover {
+    text-decoration: none;
+}
+
+.row-fluid .col-md-8 {
+    bottom: 0px;
+    padding-left: 0px !important;
+}
+
+.newestart {
+    border-bottom: 1px solid #e5e5e5;
 }

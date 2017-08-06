@@ -1,20 +1,76 @@
 {% extends 'blog/base.html' %}
 {% load staticfiles %}
 
+
 {% block content %}
-			    {% for post in posts %}
-			        <div class="post">
-			            <div class="date">
-			                Posted on {{ post.published_date }}
-			            </div>
-			            <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
-			            <p>{{ post.text|linebreaksbr }}</p>
-			        </div>
-			    {% endfor %}
-			        <!-- Older Posts -->
-			        <ul class="pager">
-			            <li class="next">
-			                <a href="{% url 'other_post_list' %}">Older Posts &rarr;</a>
-			            </li>
-			        </ul>
+<div class="row row-centered" style="text-align: left;">
+    <div class="col-md-8 col-centered">
+		<h1 class="newestart">Newest Articles</h1>
+		{% for post in posts %}
+		    <article>
+		        <div class="row">
+		            <div class="col-sm-6 col-md-4">
+		                <figure>
+		                    <a href="{% url 'post_detail' pk=post.pk %}"><img src="{{ post.image.url|default_if_none:'#' }}"></a>
+		                </figure>
+		            </div>
+		            <div class="col-sm-6 col-md-8">
+		                <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+						<p>{{ post.text|linebreaksbr|truncatechars:100 }}</p>
+						<div class="row-fluid bpad">
+							<div class="col-md-8 nopad font-sm">
+								<p class="nomargin">Posted on {{ post.published_date }}</p>
+							</div>
+							<a href="{% url 'post_detail' pk=post.pk %}" class="btn btn-default btn-sm pull-right">READ MORE</a>
+						</div>
+		            </div>
+		        </div>
+			</article>
+		{% endfor %}
+		
+			<ul class="pager">
+			    <li class="next">
+			        <a href="{% url 'other_post_list' %}">Older Posts &rarr;</a>
+			    </li>
+			</ul>
+	</div>
+	<div class="col-md-3 pull-right">
+          <div class="widget">
+            <h3>
+              Search
+            </h3>
+            <form class="row">
+              <div class="col-md-8">
+                <input type="text" class="form-control">
+              </div>
+              <div class="col-md-4">
+              <input type="submit" class="btn btn-default form-control">
+            </div>
+            </form>
+          </div>
+          <div class="widget">
+            <h3>
+              Latest Posts
+            </h3>
+            <ul class="list-group">
+              <li class="list-group-item"><a href="#">Article 1</a></li>
+              <li class="list-group-item"><a href="#">Article 2</a></li>
+              <li class="list-group-item"><a href="#">Article 3</a></li>
+              <li class="list-group-item"><a href="#">Article 4</a></li>
+            </ul>
+		</div>
+		<div class="widget">
+            <h3>
+              Categories
+            </h3>
+            <ul class="list-group">
+              <li class="list-group-item"><a href="#">IT</a></li>
+              <li class="list-group-item"><a href="#">Biology</a></li>
+              <li class="list-group-item"><a href="#">Random</a></li>
+              <li class="list-group-item"><a href="#">Funny</a></li>
+            </ul>
+		</div>
+		
+    </div>
+</div>
 {% endblock content %}

@@ -2,6 +2,8 @@
 {% load staticfiles %}
 
 {% block content %}
+        <div class="row row-centered">
+            <div class="col-md-8 col-centered">
 			    {% for post in posts %}
 			        <div class="post">
 			            <div class="date">
@@ -10,5 +12,7 @@
 			            <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
 			            <p>{{ post.text|linebreaksbr }}</p>
 			        </div>
-			    {% endfor %}
+				{% endfor %}
+			</div>
+		</div>
 {% endblock content %}
