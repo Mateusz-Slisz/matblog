@@ -4,21 +4,29 @@ from .models import Post
 from django.shortcuts import render, get_object_or_404
 from .forms import PostForm
 from django.shortcuts import redirect
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.views.generic import ListView
 
 
 def post_list(request):
-    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')[0:3]
-    return render(request, 'blog/post_list.html', {'posts': posts})
+    post_list = Post.objects.all()
+    page = request.GET.get('page')
+    forms = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')[0:3]
+    paginator = Paginator(post_list, per_page=3)
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator(paginator.num_pages)
+    return render(request, 'blog/post_list.html', {'posts': posts,'page': page, 'forms': forms,})
 
-
-def other_post_list(request):
-    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')[3:]
-    return render(request, 'blog/other_post_list.html', {'posts': posts})
 
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    return render(request, 'blog/post_detail.html', {'post': post})
+    form = post
+    return render(request, 'blog/post_detail.html', {'post': post, 'form' : form})
 
 
 def post_new(request):
