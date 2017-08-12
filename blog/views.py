@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.utils import timezone
-from .models import Post
+from .models import Post, Category
 from django.shortcuts import render, get_object_or_404
 from .forms import PostForm
 from django.shortcuts import redirect
@@ -12,6 +12,7 @@ def post_list(request):
     post_list = Post.objects.all()
     page = request.GET.get('page')
     forms = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')[0:3]
+    categories = Category.objects.all()
     paginator = Paginator(post_list, per_page=3)
     try:
         posts = paginator.page(page)
@@ -19,14 +20,15 @@ def post_list(request):
         posts = paginator.page(1)
     except EmptyPage:
         posts = paginator(paginator.num_pages)
-    return render(request, 'blog/post_list.html', {'posts': posts,'page': page, 'forms': forms,})
+    return render(request, 'blog/post_list.html', {'posts': posts,'page': page, 'forms': forms, 'categories': categories})
 
 
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     form = post
-    return render(request, 'blog/post_detail.html', {'post': post, 'form' : form})
+    category = post
+    return render(request, 'blog/post_detail.html', {'post': post, 'form' : form, 'category': category,})
 
 
 def post_new(request):
@@ -56,6 +58,18 @@ def post_edit(request, pk):
     else:
         form = PostForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form})
+
+
+def category_list(request):
+    categories = Category.objects.all()
+    posts = Post.objects.all().filter('category')
+    return render (request, 'blog/category_list.html', {'categories': categories, 'posts': posts}) # blog/category_list.html should be the template that categories are listed.
+
+
+def category_detail(request, pk):
+    category = get_object_or_404(Category, pk=pk)
+
+    return render(request, 'blog/category_detail.html', {'category': category}) 
 
 
 def about(request):

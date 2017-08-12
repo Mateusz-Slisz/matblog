@@ -66,6 +66,7 @@ a {
 
 a:hover {
     color: #0085A1;
+    text-decoration: none;
 }
 
 .footer p {
@@ -201,6 +202,12 @@ img {
     letter-spacing: 1px;
 }
 
+.pager { 
+    display: inline-block;
+}
+
+
+
 .w3-dark-grey,.w3-hover-dark-grey:hover,.w3-dark-gray,.w3-hover-dark-gray:hover{
     color:#fff!important;
     background-color:#616161!important;
@@ -236,8 +243,4 @@ article a:hover {
 
 .newestart {
     border-bottom: 1px solid #e5e5e5;
-}
-
-.row-fluid {
-    bottom: 0px;
 }

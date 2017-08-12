@@ -1,0 +1,9 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<h3>Searching posts by: {{ category.title }}</h3>
+{% for post in posts %}
+<h1>a</h1>
+{{ post.title }}
+{% endfor %}
+{% endblock %}

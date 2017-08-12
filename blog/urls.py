@@ -6,6 +6,8 @@ urlpatterns = [
     url(r'^post/(?P<pk>[0-9]+)/$', views.post_detail, name='post_detail'),
     url(r'^post/new/$', views.post_new, name='post_new'),
     url(r'^post/(?P<pk>[0-9]+)/edit/$', views.post_edit, name='post_edit'),
+    url(r'^category$', views.category_list, name='category_list'),
+    url(r'^category/(?P<pk>\d+)/$', views.category_detail, name='category_detail'),
     url(r'^about$', views.about, name='about'),
     url(r'^projects$', views.projects, name='projects'),
 ]
