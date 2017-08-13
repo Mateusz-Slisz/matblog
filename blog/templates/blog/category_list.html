@@ -1,1 +1,84 @@
 {% extends 'blog/base.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+<div class="row row-centered" style="text-align: left;">
+    <div class="col-md-8 col-centered">
+      <h1 class="newestart">Posts</h1>
+      <!-- Articles -->
+      {% for post in posts %}
+          <article>
+              <div class="row">
+                  <div class="col-sm-6 col-md-4">
+                      <figure>
+                          <a href="{% url 'post_detail' pk=post.pk %}"><img src="{{ post.image.url|default_if_none:'#' }}"></a>
+                      </figure>
+                  </div>
+                  <div class="col-sm-6 col-md-8">
+                    <span class="badge">{{ post.category }}</span>
+                    <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+                    <p>{{ post.text|linebreaksbr|truncatechars:100 }}</p>
+                    <div class="row-fluid bpad">
+                      <div class="col-md-8 nopad font-sm">
+                        <p class="nomargin">Posted on {{ post.published_date }}</p>
+                      </div>
+                      <a href="{% url 'post_detail' pk=post.pk %}" class="btn btn-default btn-sm pull-right">READ MORE</a>
+                    </div>
+                  </div>
+              </div>
+          </article>
+      {% endfor %}
+        <!-- Older button -->
+        {% if posts.has_previous %}
+          <ul class="pager pull-left">
+              <li class="prev">
+                  <a href="?page={{ posts.previous_page_number }}" style="float: left;">&larr; Newest Posts</a>            
+              </li>
+          </ul>
+        {% endif %}
+        {% if posts.has_next %}
+          <ul class="pager pull-right">
+              <li class="next">
+                  <a href="?page={{ posts.next_page_number }}">Older Posts &rarr;</a>            
+              </li>
+          </ul>
+        {% endif %}
+    </div>
+    <div class="col-md-3">
+      <div class="widget">
+        <h3>
+          Search
+        </h3>
+        <form class="row" method="GET" action="">
+          <div class="col-md-8">
+            <input type="text" name="q" class="form-control" placeholder="Search posts"/>
+          </div>
+          <div class="col-md-4">
+            <input type="submit" class="btn btn-default form-control" value="Search"/>
+          </div>
+        </form>
+      </div>
+      <div class="widget">
+        <h3>
+          Latest Posts
+        </h3>
+        <ul class="list-group">
+          {% for form in forms %}
+          <li class="list-group-item"><a href="{% url 'post_detail' pk=form.pk %}">{{ form.title|truncatewords:5 }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="widget">
+        <h3>
+          Categories
+        </h3>
+        <ul class="list-group">
+          {% for category in categories %}
+          <li class="list-group-item"><a href="{% url 'category_detail' pk=category.pk %}">{{ category.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+</div>
+{% endblock content %}

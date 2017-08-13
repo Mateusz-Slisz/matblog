@@ -5,7 +5,11 @@
 {% block content %}
 <div class="row row-centered" style="text-align: left;">
     <div class="col-md-8 col-centered">
-      <h1 class="newestart">Posts</h1>
+      {% if posts.has_previous %}
+      <h1 class="newestart">Older Posts</h1>
+      {% else %}
+      <h1 class="newestart">Recent Posts</h1>
+      {% endif %}
       <!-- Articles -->
       {% for post in posts %}
           <article>
@@ -33,14 +37,14 @@
         {% if posts.has_previous %}
           <ul class="pager pull-left">
               <li class="prev">
-                  <a href="?page={{ posts.previous_page_number }}" style="float: left;">&larr; Newest Posts</a>            
+                  <a href="?page={{ posts.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" style="float: left;">&larr; Newest Posts</a>            
               </li>
           </ul>
         {% endif %}
         {% if posts.has_next %}
           <ul class="pager pull-right">
               <li class="next">
-                  <a href="?page={{ posts.next_page_number }}">Older Posts &rarr;</a>            
+                  <a href="?page={{ posts.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Older Posts &rarr;</a>            
               </li>
           </ul>
         {% endif %}
@@ -61,7 +65,7 @@
       </div>
       <div class="widget">
         <h3>
-          Latest Posts
+          Recent Posts
         </h3>
         <ul class="list-group">
           {% for form in forms %}
