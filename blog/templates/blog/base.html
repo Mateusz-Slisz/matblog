@@ -1,7 +1,7 @@
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
-    <head>
+    <head>  
         <title>MatBlog</title>
         <!-- Meta -->
         <meta charset="UTF-8">
@@ -22,7 +22,7 @@
     </head>
     <body>
         <!-- Navbar -->
-        <nav class="navbar navbar-default">
+        <nav class="navbar navbar-default navbar-fixed-top">
           <div class="container">
             <div class="navbar-header">
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -59,7 +59,7 @@
         </div>
         <!-- Footer -->
         <div class="end container">
-            <footer class="footer">
+        <footer class="footer">
                 <ul class="list-inline text-center">
                     <li>
                         <a target="_blank" href="//www.facebook.com/mateusz.slisz">
@@ -77,9 +77,17 @@
                         </span>
                         </a>
                     </li>
-                <p>&copy; MatBlog 2017</p>
+                    <li>
+                        <a target="_blank" href="//www.linkedin.com/in/mateusz-slisz-557775139/">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                        </span>
+                        </a>
+                    </li>
+                <p>MatBlog &copy; 2017</p>
                 </ul>        
-            </footer>
+        </footer>
         </div>
     </body>
 </html>

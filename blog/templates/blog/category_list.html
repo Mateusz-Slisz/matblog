@@ -1,14 +1,16 @@
 {% extends 'blog/base.html' %}
-{% load staticfiles %}
-
 
 {% block content %}
 <div class="row row-centered" style="text-align: left;">
     <div class="col-md-8 col-centered">
-      <h1 class="newestart">Posts</h1>
-      <!-- Articles -->
-      {% for post in posts %}
-          <article>
+      {% if request.GET.q %}
+      <h1 class="newestart">Search results for: '{{ request.GET.q }}' in category: {{ category.title }}</h1>
+      {% else %}
+      <h1 class="newestart">Category: {{ category.title }}</h1>
+      {% endif %}
+
+    {% for post in category.get_posts %}
+            <article>
               <div class="row">
                   <div class="col-sm-6 col-md-4">
                       <figure>
@@ -16,19 +18,19 @@
                       </figure>
                   </div>
                   <div class="col-sm-6 col-md-8">
-                    <span class="badge">{{ post.category }}</span>
+                    <p class="nomargin">{{ post.published_date }}</p>
                     <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
                     <p>{{ post.text|linebreaksbr|truncatechars:100 }}</p>
                     <div class="row-fluid bpad">
-                      <div class="col-md-8 nopad font-sm">
-                        <p class="nomargin">Posted on {{ post.published_date }}</p>
-                      </div>
+                      <span class="badge">{{ post.category }}</span>
                       <a href="{% url 'post_detail' pk=post.pk %}" class="btn btn-default btn-sm pull-right">READ MORE</a>
                     </div>
-                  </div>
+                  </div>  
               </div>
-          </article>
-      {% endfor %}
+            </article>
+    {% empty %}
+    <h3>Sorry, but no post don't have category '{{ category.title }}'</h3>
+    {% endfor %}
         <!-- Older button -->
         {% if posts.has_previous %}
           <ul class="pager pull-left">
@@ -46,22 +48,18 @@
         {% endif %}
     </div>
     <div class="col-md-3">
+      <h3>
+        Home
+      </h3>
       <div class="widget">
-        <h3>
-          Search
-        </h3>
-        <form class="row" method="GET" action="">
-          <div class="col-md-8">
-            <input type="text" name="q" class="form-control" placeholder="Search posts"/>
-          </div>
-          <div class="col-md-4">
-            <input type="submit" class="btn btn-default form-control" value="Search"/>
-          </div>
-        </form>
+        <a href="{% url 'post_list' %}" class="btn btn-default btn-block">
+          <span class="glyphicon glyphicon-chevron-left"></span> Back to home
+        </a>
       </div>
+
       <div class="widget">
         <h3>
-          Latest Posts
+          Recent Posts
         </h3>
         <ul class="list-group">
           {% for form in forms %}
@@ -69,16 +67,25 @@
           {% endfor %}
         </ul>
       </div>
+
       <div class="widget">
         <h3>
           Categories
         </h3>
         <ul class="list-group">
           {% for category in categories %}
-          <li class="list-group-item"><a href="{% url 'category_detail' pk=category.pk %}">{{ category.title }}</a></li>
+          <li class="list-group-item"><a href="{% url 'category_list' pk=category.pk %}">{{ category.title }}</a></li>
           {% endfor %}
         </ul>
       </div>
+
+      <div class="widget">
+        <h3>
+          {{ category.title }}
+        </h3>
+        <span class="label label-default">Created on: {{ category.published_date }}</span>  
+        <span class="label label-default">Amount of posts: {{ post_numbers }}</span>
+    </div>
     </div>
 </div>
-{% endblock content %}
+{% endblock %}

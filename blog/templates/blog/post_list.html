@@ -1,14 +1,19 @@
 {% extends 'blog/base.html' %}
 {% load staticfiles %}
+{% load crispy_forms_tags %}
 
 
 {% block content %}
 <div class="row row-centered" style="text-align: left;">
     <div class="col-md-8 col-centered">
-      {% if posts.has_previous %}
-      <h1 class="newestart">Older Posts</h1>
+      {% if request.GET.q and posts.has_previous %}
+      <h1 class="newestart">Search Results for: '{{ request.GET.q }}'</h1>
+      {% elif posts.has_previous %}
+      <h1 class="newestart" id="tit">Older Posts</h1>
+      {% elif request.GET.q %}
+      <h1 class="newestart">Search Results for: '{{ request.GET.q }}'</h1>
       {% else %}
-      <h1 class="newestart">Recent Posts</h1>
+      <h1 class="newestart" id="tit">Recent Posts</h1>
       {% endif %}
       <!-- Articles -->
       {% for post in posts %}
@@ -20,13 +25,11 @@
                       </figure>
                   </div>
                   <div class="col-sm-6 col-md-8">
-                    <span class="badge">{{ post.category }}</span>
-                    <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+                    <p class="nomargin">{{ post.published_date }}</p>
+                    <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
                     <p>{{ post.text|linebreaksbr|truncatechars:100 }}</p>
                     <div class="row-fluid bpad">
-                      <div class="col-md-8 nopad font-sm">
-                        <p class="nomargin">Posted on {{ post.published_date }}</p>
-                      </div>
+                      <span class="badge">{{ post.category }}</span>
                       <a href="{% url 'post_detail' pk=post.pk %}" class="btn btn-default btn-sm pull-right">READ MORE</a>
                     </div>
                   </div>
@@ -34,6 +37,7 @@
           </article>
       {% endfor %}
         <!-- Older button -->
+        <!---
         {% if posts.has_previous %}
           <ul class="pager pull-left">
               <li class="prev">
@@ -48,21 +52,49 @@
               </li>
           </ul>
         {% endif %}
+        -->
+          {% if posts.has_other_pages %}
+          <div style="text-align: center;">
+            <ul class="pagination">
+              {% if posts.has_previous %}
+                <li><a href="?page={{ posts.previous_page_number }}">&laquo;</a></li>
+              {% else %}
+                <li class="disabled"><span>&laquo;</span></li>
+              {% endif %}
+              {% for i in posts.paginator.page_range %}
+                {% if posts.number == i %}
+                  <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                {% else %}
+                  <li><a href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+              {% endfor %}
+              {% if posts.has_next %}
+                <li><a href="?page={{ posts.next_page_number }}">&raquo;</a></li>
+              {% else %}
+                <li class="disabled"><span>&raquo;</span></li>
+              {% endif %}
+            </ul>
+          </div>
+          {% endif %}
     </div>
     <div class="col-md-3">
+
       <div class="widget">
         <h3>
           Search
         </h3>
-        <form class="row" method="GET" action="">
-          <div class="col-md-8">
-            <input type="text" name="q" class="form-control" placeholder="Search posts"/>
-          </div>
-          <div class="col-md-4">
-            <input type="submit" class="btn btn-default form-control" value="Search"/>
-          </div>
+        <form method="GET" action="">
+            <div class="input-group">
+              <input type="text" class="search-query form-control" placeholder="Search" name="q" />
+              <span class="input-group-btn">
+                <button class="btn btn-success" type="submit">
+                  <span class="glyphicon glyphicon-search"></span>
+                </button>
+              </span>
+            </div>
         </form>
       </div>
+
       <div class="widget">
         <h3>
           Recent Posts
@@ -73,15 +105,53 @@
           {% endfor %}
         </ul>
       </div>
+
       <div class="widget">
         <h3>
           Categories
         </h3>
         <ul class="list-group">
           {% for category in categories %}
-          <li class="list-group-item"><a href="{% url 'category_detail' pk=category.pk %}">{{ category.title }}</a></li>
+          <li class="list-group-item"><a href="{% url 'category_list' pk=category.pk %}">{{ category.title }}</a></li>
           {% endfor %}
         </ul>
+      </div>
+
+      <div class="widget">
+        <h3>
+          Contact me
+        </h3>
+        <form action="" method="post"  id="contact_form">
+          {% csrf_token %}
+            <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                  <input type="text" name="name" class="textinput textInput form-control" required id="id_name" placeholder="Name" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                  <input type="email" name="from_email" class="emailinput form-control" required id="id_from_email" placeholder="E-mail"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                   <textarea name="message" rows="4" class="textarea form-control" required id="id_message" placeholder="Message..."></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-default" >Send <span class="glyphicon glyphicon-send"></span></button>
+            </div>
+            {% if messages %}
+								{% for message in messages %}
+								<p class="alert alert-success">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        </form>
       </div>
     </div>
 </div>

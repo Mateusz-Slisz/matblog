@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+    'crispy_forms',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -106,3 +107,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 MEDIA_URL = '/media/'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

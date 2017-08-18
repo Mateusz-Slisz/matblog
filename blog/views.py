@@ -2,15 +2,33 @@ from django.shortcuts import render
 from django.utils import timezone
 from .models import Post, Category
 from django.shortcuts import render, get_object_or_404
-from .forms import PostForm
+from .forms import PostForm, ContactForm
 from django.shortcuts import redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import ListView
 from django.db.models import Q
+from django.core.mail import send_mail, BadHeaderError
+from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib import messages
 
 
 
 def post_list(request):
+    if request.method == 'GET':
+        form = ContactForm()
+    else:
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            from_email = form.cleaned_data['from_email']
+            message = form.cleaned_data['message']
+            try:
+                send_mail(name, message, from_email, ['mat.slisz@yahoo.com'])
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            messages.success(request, 'Thanks for your reply')
+            return redirect('post_list')
+    
     post_list = Post.objects.all()
     page = request.GET.get('page')
     forms = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')[0:3]
@@ -20,7 +38,9 @@ def post_list(request):
     if query:
         post_list = post_list.filter(
                     Q(text__icontains=query)|
-                    Q(title__icontains=query))
+                    Q(title__icontains=query)|
+                    Q(published_date__icontains=query)|
+                    Q(created_date__icontains=query))
                     
     paginator = Paginator(post_list, per_page=3)
     try:
@@ -35,6 +55,7 @@ def post_list(request):
         'page': page,
         'forms': forms, 
         'categories': categories,
+        'form': form,
     }
     return render(request, 'blog/post_list.html', context)
 
@@ -89,34 +110,24 @@ def post_edit(request, pk):
     return render(request, 'blog/post_edit.html', context)
 
 
-def category_list(request):
+def category_list(request, pk):
     categories = Category.objects.all()
-    posts = Post.objects.all().filter('category')
-    forms = Post.objects.all()
-
-    context = {
-        'categories': categories, 
-        'posts': posts, 
-        'forms': forms,   
-    }
-    return render (request, 'blog/category_list.html', context)
-
-
-def category_detail(request, pk):
-    categories = Category.objects.all()
+    page = request.GET.get('page')
     category = get_object_or_404(Category, pk=pk)
     forms = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')[0:3]
     form = get_object_or_404(Post, pk=pk)
     post = form
-
+    post_numbers =  Post.objects.filter(category=category).count
+    
     context = {
         'category': category, 
         'categories': categories, 
         'form': form,  
         'forms': forms,
         'post': post,
+        'post_numbers': post_numbers,
     }
-    return render(request, 'blog/category_detail.html', context)
+    return render(request, 'blog/category_list.html', context)
 
 
 def about(request):
