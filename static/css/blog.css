@@ -4,7 +4,6 @@ html, body {
     width: 100%; 
     height: 100%;
     padding-top: 35px;
-    margin-bottom: 60px;
 }
 
 h1, h2, h3, h4 {
@@ -26,7 +25,6 @@ h1, h2, h3, h4 {
     margin-bottom: 70px;
     padding-bottom: 40px;
     position: relative;
-    text-align: left;
 }
 
 .post p {
@@ -39,6 +37,7 @@ h1, h2, h3, h4 {
     max-height: X*N;
     font-size: 20px;
     font-family: "Libre Franklin", "Helvetica Neue", helvetica, arial, sans-serif;
+    text-align: left;
 }
 .post h1 a, .post h1 a:visited {
     color: #333;
@@ -68,11 +67,17 @@ h1, h2, h3, h4 {
 }
 
 .footer {
-    margin-top: 50px;
-    padding-top: 30px;
-    padding-bottom: 30px;
     border-top: 1px solid #e5e5e5;
+    position: absolute;
+    width: 100%;
+    height: 10px;
+    margin-top: 50px;
 }
+
+.footer ul li {
+    margin-top: 10px;
+}
+
 
 a {
     color: #333;
@@ -84,7 +89,6 @@ a:hover {
 }
 
 .footer p {
-    margin-top: 20px;
     font-size: 15px;
     color: #666;
 }
@@ -92,8 +96,6 @@ a:hover {
 .row-centered {
     text-align:center;
 }
-
-
 
 .col-centered { 
     display:inline-block; 
@@ -272,4 +274,12 @@ article a:hover {
     font-weight: 700;
     letter-spacing: 0.03em;
     text-transform: uppercase;
+}
+
+.pagi {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    display: flow-root;
 }

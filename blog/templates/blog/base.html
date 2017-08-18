@@ -16,11 +16,22 @@
         <link href="//fonts.googleapis.com/css?family=Lora" rel="stylesheet" type="text/css">
         <link href="//fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
         <link href="{% static 'font-awesome/css/font-awesome.css' %}" rel="stylesheet" type="text/css">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
         <!-- JS -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://getbootstrap.com/dist/js/bootstrap.min.js"></script>
     </head>
     <body>
+
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v2.10";
+        fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+
         <!-- Navbar -->
         <nav class="navbar navbar-default navbar-fixed-top">
           <div class="container">
@@ -52,14 +63,16 @@
             </div>
           </div>
         </nav>
+
         <!-- Variable container -->
         <div class="content container">
                 {% block content %}
                 {% endblock %}
         </div>
+
         <!-- Footer -->
-        <div class="end container">
         <footer class="footer">
+            <div class="wrap">
                 <ul class="list-inline text-center">
                     <li>
                         <a target="_blank" href="//www.facebook.com/mateusz.slisz">
@@ -85,9 +98,11 @@
                         </span>
                         </a>
                     </li>
-                <p>MatBlog &copy; 2017</p>
-                </ul>        
+                    <li>
+                        <p>MatBlog &copy; 2017</p>
+                    </li>
+                </ul>
+            </div>     
         </footer>
-        </div>
     </body>
 </html>

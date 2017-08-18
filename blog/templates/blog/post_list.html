@@ -53,29 +53,36 @@
           </ul>
         {% endif %}
         -->
-          {% if posts.has_other_pages %}
-          <div style="text-align: center;">
-            <ul class="pagination">
+{% if posts.has_other_pages %}
+
+          <div class="pagi">
+            
               {% if posts.has_previous %}
-                <li><a href="?page={{ posts.previous_page_number }}">&laquo;</a></li>
-              {% else %}
-                <li class="disabled"><span>&laquo;</span></li>
+                <a href="?page={{ posts.previous_page_number }}" class="pull-left">
+                    <button type="button" class="btn btn-default">
+                        <span>&larr;</span>
+                    </button>
+                </a>
               {% endif %}
+
               {% for i in posts.paginator.page_range %}
                 {% if posts.number == i %}
-                  <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                  <span style="color:dimgrey; padding-left: 7px; padding-right: 7px;">{{ i }} <span class="sr-only">(current)</span></span>
                 {% else %}
-                  <li><a href="?page={{ i }}">{{ i }}</a></li>
+                  <a href="?page={{ i }}">{{ i }}</a>
                 {% endif %}
               {% endfor %}
+
               {% if posts.has_next %}
-                <li><a href="?page={{ posts.next_page_number }}">&raquo;</a></li>
-              {% else %}
-                <li class="disabled"><span>&raquo;</span></li>
+                <a href="?page={{ posts.next_page_number }}" class="pull-right">
+                    <button type="button" class="btn btn-default">
+                        <span>&rarr;</span>
+                    </button>
+                </a>
               {% endif %}
-            </ul>
+
           </div>
-          {% endif %}
+{% endif %}
     </div>
     <div class="col-md-3">
 
