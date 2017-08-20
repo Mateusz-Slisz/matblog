@@ -31,21 +31,37 @@
     {% empty %}
     <h3>Sorry, but no post don't have category '{{ category.title }}'</h3>
     {% endfor %}
-        <!-- Older button -->
-        {% if posts.has_previous %}
-          <ul class="pager pull-left">
-              <li class="prev">
-                  <a href="?page={{ posts.previous_page_number }}" style="float: left;">&larr; Newest Posts</a>            
-              </li>
-          </ul>
-        {% endif %}
-        {% if posts.has_next %}
-          <ul class="pager pull-right">
-              <li class="next">
-                  <a href="?page={{ posts.next_page_number }}">Older Posts &rarr;</a>            
-              </li>
-          </ul>
-        {% endif %}
+
+{% if posts.has_other_pages %}
+
+        <!-- Older posts -->
+          <div class="pagi">
+            <ul class="pagination">
+
+              {% if posts.has_previous %}
+                <li><a href="?page={{ posts.previous_page_number }}">Prev</a></li>
+              {% else %}
+                <li class="disabled"><span>Prev</span></li>
+              {% endif %}
+
+              {% for i in posts.paginator.page_range %}
+                {% if posts.number == i %}
+                  <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                {% else %}
+                  <li><a href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+              {% endfor %}
+
+              {% if posts.has_next %}
+                <li><a href="?page={{ posts.next_page_number }}">Next</a></li>
+              {% else %}
+                <li class="disabled"><span>Next</span></li>
+              {% endif %}
+
+            </ul>
+          </div>
+{% endif %}
+
     </div>
     <div class="col-md-3">
       <h3>
