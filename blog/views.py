@@ -112,19 +112,14 @@ def post_edit(request, pk):
 
 def category_list(request, pk):
     categories = Category.objects.all()
-    page = request.GET.get('page')
     category = get_object_or_404(Category, pk=pk)
     forms = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')[0:3]
-    form = get_object_or_404(Post, pk=pk)
-    post = form
     post_numbers =  Post.objects.filter(category=category).count
     
     context = {
         'category': category, 
-        'categories': categories, 
-        'form': form,  
+        'categories': categories,  
         'forms': forms,
-        'post': post,
         'post_numbers': post_numbers,
     }
     return render(request, 'blog/category_list.html', context)
