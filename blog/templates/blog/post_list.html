@@ -5,16 +5,16 @@
 
 {% block content %}
 
-<div class="row row-centered" style="text-align: left;">
+<div class="row row-centered" style="text-align: left; margin-top: 15px;" >
     <div class="col-md-8 col-centered">
       {% if request.GET.q and posts.has_previous %}
-      <h1 class="newestart">Search Results for: '{{ request.GET.q }}'</h1>
+      <h1 class="newestart" style="margin-top: 0px;">Search Results for: '{{ request.GET.q }}'</h1>
       {% elif posts.has_previous %}
-      <h1 class="newestart" id="tit">Older Posts</h1>
+      <h1 class="newestart" id="tit" style="margin-top: 0px;">Older Posts</h1>
       {% elif request.GET.q %}
-      <h1 class="newestart">Search Results for: '{{ request.GET.q }}'</h1>
+      <h1 class="newestart" style="margin-top: 0px;">Search Results for: '{{ request.GET.q }}'</h1>
       {% else %}
-      <h1 class="newestart" id="tit">Recent Posts</h1>
+      <h1 class="newestart" id="tit" style="margin-top: 0px;">Recent Posts</h1>
       {% endif %}
 
       <!-- Articles -->
@@ -37,6 +37,8 @@
                   </div>
               </div>
           </article>
+      {% empty %}
+      <h3>Sorry, but no post don't have '{{ request.GET.q }}'</h3>
       {% endfor %}
 
 {% if posts.has_other_pages %}
@@ -71,10 +73,7 @@
 
     <div class="col-md-3">
 
-      <div class="widget">
-        <h3>
-          Search
-        </h3>
+      <div class="widget" style="margin-bottom: 20px;">
         <form method="GET" action="">
             <div class="input-group">
               <input type="text" class="search-query form-control" placeholder="Search" name="q" />
@@ -91,22 +90,22 @@
         <h3>
           Recent Posts
         </h3>
-        <ul class="list-group">
-          {% for form in forms %}
-          <li class="list-group-item"><a href="{% url 'post_detail' pk=form.pk %}">{{ form.title|truncatewords:5 }}</a></li>
-          {% endfor %}
-        </ul>
+            <ul class="list-group">
+              {% for form in forms %}
+              <a href="{% url 'post_detail' pk=form.pk %}" class="list-group-item">{{ form.title|truncatewords:5 }}</a>
+              {% endfor %}
+            </ul>     
       </div>
 
       <div class="widget">
         <h3>
           Categories
         </h3>
-        <ul class="list-group">
-          {% for category in categories %}
-          <li class="list-group-item"><a href="{% url 'category_list' pk=category.pk %}">{{ category.title }}</a></li>
-          {% endfor %}
-        </ul>
+            <ul class="list-group">
+              {% for category in categories %}
+              <a href="{% url 'category_list' pk=category.pk %}" class="list-group-item">{{ category.title }}</a>
+              {% endfor %}
+            </ul>    
       </div>
 
       <div class="widget">

@@ -1,12 +1,12 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-<div class="row row-centered" style="text-align: left;">
+<div class="row row-centered" style="text-align: left; margin-top: 15px;">
     <div class="col-md-8 col-centered">
       {% if request.GET.q %}
-      <h1 class="newestart">Search results for: '{{ request.GET.q }}' in category: {{ category.title }}</h1>
+      <h1 class="newestart" style="margin-top: 0px;">Search results for: '{{ request.GET.q }}' in category: {{ category.title }}</h1>
       {% else %}
-      <h1 class="newestart">Category: {{ category.title }}</h1>
+      <h1 class="newestart" style="margin-top: 0px;">Category: {{ category.title }}</h1>
       {% endif %}
 
     {% for post in category.get_posts %}
@@ -64,9 +64,6 @@
 
     </div>
     <div class="col-md-3">
-      <h3>
-        Home
-      </h3>
       <div class="widget">
         <a href="{% url 'post_list' %}" class="btn btn-default btn-block">
           <span>&larr; Back to home</span>
@@ -79,7 +76,7 @@
         </h3>
         <ul class="list-group">
           {% for form in forms %}
-          <li class="list-group-item"><a href="{% url 'post_detail' pk=form.pk %}">{{ form.title|truncatewords:5 }}</a></li>
+          <a href="{% url 'post_detail' pk=form.pk %}" class="list-group-item">{{ form.title|truncatewords:5 }}</a>
           {% endfor %}
         </ul>
       </div>
@@ -90,7 +87,7 @@
         </h3>
         <ul class="list-group">
           {% for category in categories %}
-          <li class="list-group-item"><a href="{% url 'category_list' pk=category.pk %}">{{ category.title }}</a></li>
+          <a href="{% url 'category_list' pk=category.pk %}" class="list-group-item">{{ category.title }}</a>
           {% endfor %}
         </ul>
       </div>
