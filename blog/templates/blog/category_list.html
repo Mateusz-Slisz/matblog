@@ -71,9 +71,9 @@
       </div>
 
       <div class="widget">
-        <h3>
+        <h4>
           Recent Posts
-        </h3>
+        </h4>
         <ul class="list-group">
           {% for form in forms %}
           <a href="{% url 'post_detail' pk=form.pk %}" class="list-group-item">{{ form.title|truncatewords:5 }}</a>
@@ -82,9 +82,9 @@
       </div>
 
       <div class="widget">
-        <h3>
+        <h4>
           Categories
-        </h3>
+        </h4>
         <ul class="list-group">
           {% for category in categories %}
           <a href="{% url 'category_list' pk=category.pk %}" class="list-group-item">{{ category.title }}</a>
@@ -93,9 +93,9 @@
       </div>
 
       <div class="widget">
-        <h3>
+        <h4>
           {{ category.title }}
-        </h3>
+        </h4>
         <span class="label label-default">Created on: {{ category.published_date }}</span>  
         <span class="label label-default">Amount of posts: {{ post_numbers }}</span>
     </div>
